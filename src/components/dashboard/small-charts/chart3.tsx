@@ -20,11 +20,11 @@ import {
 } from "@/components/ui/chart";
 
 const chartData = [
-  { category: "science", students: 275, fill: "var(--primary)" },
-  { category: "math", students: 200, fill: "var(--color-math)" },
-  { category: "literature", students: 287, fill: "var(--color-literature)" },
-  { category: "history", students: 173, fill: "var(--color-history)" },
-  { category: "other", students: 190, fill: "var(--color-other)" },
+  { category: "science", students: 275, fill: "var(--chart-1)" },
+  { category: "math", students: 200, fill: "var(--chart-2)" },
+  { category: "literature", students: 287, fill: "var(--chart-3)" },
+  { category: "history", students: 173, fill: "var(--chart-4)" },
+  { category: "other", students: 190, fill: "var(--primary)" },
 ];
 
 const chartConfig = {

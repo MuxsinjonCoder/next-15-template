@@ -24,8 +24,6 @@ import {
   SheetTitle,
   SheetDescription,
 } from "@/components/ui/sheet";
-// import Cookies from "js-cookie";
-// import { useUser } from "@/context/UserContext";
 import { loadState } from "@/config/storage";
 
 export function AppSidebar() {
@@ -36,58 +34,20 @@ export function AppSidebar() {
 
   const path = usePathname();
   const router = useRouter();
-  //   const { user } = useUser();
   const userData = loadState("userData");
 
-  // useEffects
-  // useEffect(() => {
-  //   SidebarItems.forEach((item, index) => {
-  //     if (item.subItems) {
-  //       const isSubItemActive = item.subItems.some(
-  //         (subItem) => subItem.url === pathname
-  //       );
-  //       if (isSubItemActive) {
-  //         setOpenIndex(index);
-  //       }
-  //     }
-  //   });
-  // }, [pathname]);
-
-  // useEffect for checking registry
-  //   useEffect(() => {
-  //     const token = Cookies.get("token");
-
-  //     // Agar token yo'q bo'lsa yoki user ma'lumotlari mos kelmasa, loginga yo'naltiramiz
-  //     if (
-  //       !token ||
-  //       token === undefined ||
-  //       token === null ||
-  //       (user &&
-  //         userData &&
-  //         (!user?.id ||
-  //           user?.id !== userData?.id ||
-  //           !userData?.fullName ||
-  //           !user?.fullName))
-  //     ) {
-  //       router.replace("/auth/login");
-  //       Cookies.remove("token");
-  //       Cookies.remove("tokenExpiration");
-  //       localStorage.clear();
-  //       //   toast({
-  //       //     title: "Iltimos, tizimga qayta kirishingizni so'raymiz.",
-  //       //     variant: "info",
-  //       //   });
-  //     } else if (!userData && !user) {
-  //       router.replace("/auth/login");
-  //       Cookies.remove("token");
-  //       Cookies.remove("tokenExpiration");
-  //       localStorage.clear();
-  //       //   toast({
-  //       //     title: "Iltimos, tizimga qayta kirishingizni so'raymiz.",
-  //       //     variant: "info",
-  //       //   });
-  //     }
-  //   }, [path, user, userData, router]);
+  useEffect(() => {
+    SidebarItems.forEach((item, index) => {
+      if (item.subItems) {
+        const isSubItemActive = item.subItems.some(
+          (subItem) => subItem.url === pathname
+        );
+        if (isSubItemActive) {
+          setOpenIndex(index);
+        }
+      }
+    });
+  }, [pathname]);
 
   const handleToggle = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
@@ -97,11 +57,7 @@ export function AppSidebar() {
     <>
       <SidebarHeader>
         <div className="relative">
-          <Link
-            onClick={() => setDrawerOpen(false)}
-            href={"/"}
-            // href={user && user?.role == "CANDIDATE" ? "/user/dashboard" : "/"}
-          >
+          <Link onClick={() => setDrawerOpen(false)} href={"/"}>
             <Image width={150} height={70} src={"/logo.png"} alt="logo" />
           </Link>
           <span className="opacity-50 absolute top-0 right-10 font-bold text-xs">
@@ -114,149 +70,83 @@ export function AppSidebar() {
       <SidebarContent className="w-[250px]">
         {user && (
           <SidebarGroup className="flex flex-col gap-[5px] pr-5 mt-5">
-            {/* for having subitem */}
-            {/* {SidebarItems.map((item, index) => {
-            const isSubItemActive = item.subItems?.some(
-              (subItem) => subItem.url === pathname
-            );
-
-            const isItemActive =
-              pathname === item.url ||
-              (item.url === "/" && pathname === "/") ||
-              (item.url !== "/" && pathname?.startsWith(item?.url || ""));
-
-            return (
-              <div key={index}>
-                {item.subItems ? (
-                  <Button
-                    variant={
-                      openIndex === index && !isSubItemActive
-                        ? "navHover"
-                        : "navHover"
-                    }
-                    onClick={() => handleToggle(index)}
-                    className="w-full flex justify-between"
-                  >
-                    <div className="flex items-center gap-2">
-                      <item.icon className="w-4 h-4" />
-                      <span>{item.title}</span>
-                    </div>
-                    <ChevronDown
-                      className={clsx(
-                        "w-4 h-4 transition-transform",
-                        openIndex === index && "rotate-180"
-                      )}
-                    />
-                  </Button>
-                ) : (
-                  <Link href={item.url} className="w-full">
-                    <Button
-                      variant={isItemActive ? "nav" : "navHover"}
-                      className="w-full flex justify-start gap-2"
-                    >
-                      <item.icon className="w-4 h-4" />
-                      <span>{item.title}</span>
-                    </Button>
-                  </Link>
-                )}
-
-                <AnimatePresence>
-                  {item.subItems &&
-                    (openIndex === index || isSubItemActive) && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden mt-2 flex flex-col gap-[5px]"
-                      >
-                        {item.subItems.map((subItem, subIndex) => {
-                          const isActive = pathname === subItem.url;
-                          return (
-                            <Link
-                              key={subIndex}
-                              href={subItem.url}
-                              className="w-full"
-                            >
-                              <Button
-                                variant={isActive ? "nav" : "navHover"}
-                                className="w-full flex pl-7 justify-start gap-2 text-sm"
-                              >
-                                <subItem.icon className="w-4 h-4" />
-                                <span>{subItem.title}</span>
-                              </Button>
-                            </Link>
-                          );
-                        })}
-                      </motion.div>
-                    )}
-                </AnimatePresence>
-              </div>
-            );
-          })} */}
-
-            {/* for role separated */}
-            {/* {SidebarItems.filter((item) =>
-              user?.role === "DEVELOPER"
-                ? true
-                : user?.role === "CANDIDATE"
-                ? item.type === "user"
-                : item.type === "admin"
-            ).map((item, index) => {
-              const isItemActive =
-                pathname === item.url ||
-                (item.url === "/" && pathname === "/") ||
-                (item.url !== "/" && pathname?.startsWith(item?.url || ""));
-
-              return ( */}
-            {SidebarItems?.map((item, index) => {
-              const isItemActive =
-                pathname === item.url ||
-                (item.url === "/" && pathname === "/") ||
-                (item.url !== "/" && pathname?.startsWith(item?.url || ""));
+            {SidebarItems.map((item, index) => {
+              const isSubItemActive = item.subItems?.some(
+                (subItem) => subItem.url === pathname
+              );
+              const isItemActive = pathname === item.url;
 
               return (
                 <div key={index}>
-                  <Link
-                    onClick={() => setDrawerOpen(false)}
-                    href={item.url}
-                    className="w-full"
-                  >
-                    <Button
-                      variant={isItemActive ? "nav" : "navHover"}
-                      className="w-full flex cursor-pointer justify-start gap-2"
+                  {item.subItems ? (
+                    <>
+                      <Button
+                        variant={isSubItemActive ? "navHover" : "navHover"}
+                        onClick={() => handleToggle(index)}
+                        className="w-full flex justify-between"
+                      >
+                        <div className="flex items-center gap-2">
+                          <item.icon className="w-4 h-4" />
+                          <span>{item.title}</span>
+                        </div>
+                        <ChevronDown
+                          className={clsx(
+                            "w-4 h-4 transition-transform",
+                            openIndex === index && "rotate-180"
+                          )}
+                        />
+                      </Button>
+                      <AnimatePresence>
+                        {item.subItems &&
+                          (openIndex === index || isSubItemActive) && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="overflow-hidden mt-2 flex flex-col gap-[5px]"
+                            >
+                              {item.subItems.map((subItem, subIndex) => {
+                                const isActive = pathname === subItem.url;
+                                return (
+                                  <Link
+                                    key={subIndex}
+                                    href={subItem.url}
+                                    className="w-full"
+                                    onClick={() => setDrawerOpen(false)}
+                                  >
+                                    <Button
+                                      variant={isActive ? "nav" : "navHover"}
+                                      className="w-full flex pl-7 justify-start gap-2 text-sm"
+                                    >
+                                      <subItem.icon className="w-4 h-4" />
+                                      <span>{subItem.title}</span>
+                                    </Button>
+                                  </Link>
+                                );
+                              })}
+                            </motion.div>
+                          )}
+                      </AnimatePresence>
+                    </>
+                  ) : (
+                    <Link
+                      href={item.url}
+                      className="w-full"
+                      onClick={() => setDrawerOpen(false)}
                     >
-                      <item.icon className="w-4 h-4" />
-                      <span>{item.title}</span>
-                    </Button>
-                  </Link>
+                      <Button
+                        variant={isItemActive ? "nav" : "navHover"}
+                        className="w-full flex cursor-pointer justify-start gap-2"
+                      >
+                        <item.icon className="w-4 h-4" />
+                        <span>{item.title}</span>
+                      </Button>
+                    </Link>
+                  )}
                 </div>
               );
             })}
-            {/* ); */}
-            {/* })} */}
-
-            {/* for roles not separated */}
-            {/* {SidebarItems.map((item, index) => {
-            const isItemActive =
-              pathname === item.url ||
-              (item.url === "/" && pathname === "/") ||
-              (item.url !== "/" && pathname?.startsWith(item?.url || ""));
-
-            return (
-              <div key={index}>
-                <Link href={item.url} className="w-full">
-                  <Button
-                    variant={isItemActive ? "nav" : "navHover"}
-                    className="w-full flex justify-start gap-2"
-                  >
-                    <item.icon className="w-4 h-4" />
-                    <span>{item.title}</span>
-                  </Button>
-                </Link>
-              </div>
-            );
-          })} */}
           </SidebarGroup>
         )}
       </SidebarContent>

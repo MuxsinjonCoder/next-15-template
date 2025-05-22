@@ -23,41 +23,25 @@ export const SidebarItems = [
     icon: BookOpen,
   },
   {
-    title: "Foydalanuvchilar",
-    url: "/users",
+    title: "Sozlamalar",
     type: "admin",
-    icon: Users,
-  },
-  {
-    title: "Profil",
-    url: "/profile",
-    type: "admin",
-    icon: UserCircle,
-  },
-  // {
-  //   title: "Sozlamalar",
-  //   type: "admin",
-  //   icon: Settings,
-  //   subItems: [
-  //     {
-  //       title: "Profil",
-  //       url: "/profile",
-  //       icon: UserCircle,
-  //     },
-  //   ],
-  // },
-
-  // user pages
-  {
-    title: "Natijalar",
-    url: "/user/dashboard",
-    type: "user",
-    icon: BarChart2,
-  },
-  {
-    title: "Testlar",
-    url: "/user/tests",
-    type: "user",
-    icon: FileText,
+    icon: Settings,
+    subItems: [
+      {
+        title: "Profil",
+        url: "/profile",
+        icon: UserCircle,
+      },
+      {
+        title: "Kategoriyalar",
+        url: "/categories",
+        icon: UserCircle,
+      },
+      {
+        title: "Bildirishnomalar",
+        url: "/notifications",
+        icon: UserCircle,
+      },
+    ],
   },
 ];
