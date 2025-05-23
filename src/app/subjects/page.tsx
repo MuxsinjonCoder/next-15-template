@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import SubjectsTable from "@/components/subjects/table";
 
 export default function SubjectsPage() {
   return (
@@ -14,12 +15,7 @@ export default function SubjectsPage() {
           </div>
         </CardHeader>
         <CardContent>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum error
-            ratione facere aperiam provident ea laboriosam sequi, omnis
-            inventore quod expedita suscipit accusantium. Similique fuga
-            repudiandae quas ex illo rerum!
-          </p>
+          <SubjectsTable />
         </CardContent>
       </Card>
     </>

@@ -45,7 +45,7 @@ export default function RootLayout({
                   <AppSidebar />
                 </div>
                 <div className="w-full flex flex-col gap-5 px-5 py-5">
-                  <div className="fixed top-0 right-0 left-[250px] py-2 px-5 backdrop-blur-xl z-50">
+                  <div className="fixed top-0 right-0 left-0 xl:left-[251px] py-2 px-5 backdrop-blur-xl z-30">
                     <AppHeader />
                   </div>
                   <div className="xl:ml-[250px] mt-10">{children}</div>

@@ -14,7 +14,7 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary border border-primary text-secondary-foreground shadow-sm hover:bg-secondary/90 rounded-md flex items-center justify-center",
         danger:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90 rounded-md",
+          "bg-destructive text-primary-foreground shadow-sm hover:bg-destructive/90 rounded-md",
         nav: "text-white bg-primary rounded-r-full hover:bg-primary/90",
         navHover:
           "bg-transparent hover:bg-primary/70 hover:text-white rounded-r-full",

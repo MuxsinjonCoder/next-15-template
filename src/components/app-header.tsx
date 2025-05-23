@@ -101,7 +101,7 @@ export default function AppHeader() {
             </Button>
           </Link>
           <DropdownMenu>
-            <DropdownMenuTrigger>
+            <DropdownMenuTrigger className="cursor-pointer">
               <Avatar>
                 {/* <AvatarImage src="default-user.png" /> */}
                 <AvatarFallback>MM</AvatarFallback>
