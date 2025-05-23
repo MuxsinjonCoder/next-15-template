@@ -74,7 +74,7 @@ export default function AppHeader() {
   //   }, [notificationsList, canPlaySound, lastNotificationCount]);
 
   const logout = () => {
-    router.replace("/auth/login");
+    router.replace("/auth/sign-in");
     // Cookies.remove("token");
     // Cookies.remove("tokenExpiration");
     window.location.reload();
